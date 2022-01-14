@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  # https-portal:
+  #   image: steveltn/https-portal:1
+  #   ports:
+  #     - '80:80'
+  #     - '443:443'
+  #   links:
+  #     - wordpress
+  #   restart: always
+  #   enviroent:
+  #     DOMEINS: 'kikko-ma-n.net -> 8080'
+  #     # STAGE: 'production'
+  #     # FORCE_RENEW: 'ture'
+
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: user
+      WORDPRESS_DB_PASSWORD: pass
+      WORDPRESS_DB_NAME: exsampledb
+    volumes:
+      - wordpress:/var/www/html
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: exsampledb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:
