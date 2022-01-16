@@ -1,18 +1,18 @@
 version: '3'
 
 services:
-  # https-portal:
-  #   image: steveltn/https-portal:1
-  #   ports:
-  #     - '80:80'
-  #     - '443:443'
-  #   links:
-  #     - wordpress
-  #   restart: always
-  #   enviroent:
-  #     DOMEINS: 'kikko-ma-n.net -> 8080'
-  #     # STAGE: 'production'
-  #     # FORCE_RENEW: 'ture'
+  https-portal:
+    image: steveltn/https-portal:1
+    ports:
+      - '80:80'
+      - '443:443'
+    links:
+      - wordpress
+    restart: always
+    environment:
+      DOMAINS: kikko-ma-n.site -> http://wordpress:8080
+      STAGE: 'staging'
+      # FORCE_RENEW: 'ture'
 
   wordpress:
     image: wordpress
